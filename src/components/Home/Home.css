@@ -1,0 +1,55 @@
+.form-card {
+  background-color: #f9f4ff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #6a1b9a;
+  font-size: 18px;
+}
+
+.form-group input {
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #d1c4e9;
+  outline: none;
+  font-size: 16px;
+  
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #9c27b0;
+  box-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+}
+
+.btn-submit {
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #7b1fa2;
+  transform: translateY(-2px);
+}

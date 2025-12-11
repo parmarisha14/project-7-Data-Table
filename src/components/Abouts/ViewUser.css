@@ -1,0 +1,82 @@
+.custom-card {
+  background-color: #f8f0ff;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #d1c4e9;
+}
+
+.custom-table thead {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+.btn-edit {
+  background-color: #ad6cb8;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  background-color: #7b1fa2;
+}
+
+.btn-delete {
+  background-color: #ce93d8;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #ab47bc;
+}
+
+.no-data {
+  padding: 1rem;
+  color: #6a1b9a;
+  font-weight: 500;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 0.5rem;
+}
+
+.page-item .page-link {
+  background-color: #e1bee7;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 5px;
+  color: #6a1b9a;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
