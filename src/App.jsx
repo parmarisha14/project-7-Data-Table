@@ -4,7 +4,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home/Page";
 import ViewData from "./components/Abouts/Page";
 import Header from "./components/Header";
-
 import Login from "./components/utils/Login";
 import Signup from "./components/utils/Signup";
 
@@ -15,10 +14,9 @@ const App = () => {
   const [editId, setEditId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
-
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("isLoggedIn")) || false
+  );
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signupData, setSignupData] = useState({
     username: "",
@@ -26,33 +24,30 @@ const App = () => {
     password: "",
     confirmPassword: "",
   });
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem("users")) || []
+  );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("list"));
-    if (data && data.length > 0) {
-      setList(data);
-      setDisplayList(data);
-    } else {
-      const defaultData = [
-        {
-          id: 1,
-          pname: "Sample Product",
-          category: "Sample",
-          price: 100,
-          qty: 10,
-        },
-      ];
-      setList(defaultData);
-      setDisplayList(defaultData);
-      localStorage.setItem("list", JSON.stringify(defaultData));
-    }
+    const storedList = JSON.parse(localStorage.getItem("list")) || [];
+    setList(storedList);
+    setDisplayList(storedList);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
     setDisplayList(list);
   }, [list]);
+
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
+
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -74,9 +69,7 @@ const App = () => {
     setProduct({});
   };
 
-  const handleDelete = (id) => {
-    setList(list.filter((item) => item.id !== id));
-  };
+  const handleDelete = (id) => setList(list.filter((item) => item.id !== id));
 
   const handleEdit = (id) => {
     const data = list.find((item) => item.id === id);
@@ -100,13 +93,11 @@ const App = () => {
     const sorted = [...displayList].sort((a, b) => {
       const valA = a[column];
       const valB = b[column];
-      if (typeof valA === "string") {
+      if (typeof valA === "string")
         return order === "asc"
           ? valA.localeCompare(valB)
           : valB.localeCompare(valA);
-      } else {
-        return order === "asc" ? valA - valB : valB - valA;
-      }
+      return order === "asc" ? valA - valB : valB - valA;
     });
     setDisplayList(sorted);
   };
@@ -118,8 +109,6 @@ const App = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!loginData.email || !loginData.password)
-      return alert("All fields are required");
     const user = users.find(
       (u) => u.email === loginData.email && u.password === loginData.password
     );
@@ -140,6 +129,7 @@ const App = () => {
     if (password !== confirmPassword) return alert("Passwords do not match");
     if (users.find((u) => u.email === email))
       return alert("User already exists");
+
     setUsers([...users, { username, email, password }]);
     setSignupData({
       username: "",
