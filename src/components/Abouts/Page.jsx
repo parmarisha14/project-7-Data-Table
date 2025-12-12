@@ -20,6 +20,7 @@ const Page = ({
             style={{ minWidth: "150px" }}
             onChange={(e) => handleSort(e.target.value, "asc")}
           >
+            <option value="disabled selected">--Select-Asc---</option>
             <option value="pname">Name Asc</option>
             <option value="category">Category Asc</option>
             <option value="price">Price Asc</option>
@@ -30,6 +31,7 @@ const Page = ({
             style={{ minWidth: "150px" }}
             onChange={(e) => handleSort(e.target.value, "desc")}
           >
+            <option value="disabled selected">--Select-Desc---</option>
             <option value="pname">Name Desc</option>
             <option value="category">Category Desc</option>
             <option value="price">Price Desc</option>
